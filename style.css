@@ -1,53 +1,71 @@
 :root {
-  --color-black: black; /* whatever */
-  --color-blue: darkblue; /* whatever */
-  --color-white: white; /* whatever */
-  --color-gray: dimgray; /* whatever */
+  --color-black: black;
+  --color-blue: darkblue;
+  --color-white: white;
+  --color-gray: dimgray;
 }
 
-.container-wrapper {
-  font-style: italic;
-  font-weight: 600;
-  inline-size: 50rem;
-  margin-inline: auto;
+body {
+  display: grid;
+  min-block-size: 100dvh;
+  place-content: center;
 }
 
 .container {
-  container-type: inline-size;
-  padding: .25rem 1rem;
-  margin-block-end: .5rem;
-  border-radius: 1rem 0 1rem 0;
-  p {
-    padding: .5rem 2rem;
-  }
-  &:last-child {
-    margin-block-end: 0;
-  }
-  &[data-color=black] {
-    container-name: black;
-    background-color: var(--color-black);
-    color: var(--color-white);
-  }
-  &[data-color=blue] {
-    container-name: blue;
-    background-color: var(--color-blue);
-    color: var(--color-white);
-  }
-  &[data-color=white] {
-    container-name: white;
-    color: var(--color-white);
-    border: 2px dashed red;
-  }
-  &[data-color=gray] {
-    container-name: var(--color-gray); /* whatever */
-    background-color: var(--color-gray);
-    color: var(--color-white);
-  }
-}
+  max-inline-size: 50rem;
+  margin-inline: auto;
 
-@container white (inline-size > 0) {
-  p {
-      background-color: red; /* only for testing purposes */
-      border-radius: 0 1rem 0 1rem;
+  div {
+    container-type: inline-size;
+    padding: .25rem 1rem;
+    margin-block-end: .5rem;
+    border-radius: 1rem 0 1rem 0;
+
+    &[data-color=black] {
+      container-name: var(--color-black);
+      background-color: var(--color-black);
+      color: var(--color-white);
     }
+
+    &[data-color=blue] {
+      container-name: var(--color-blue);
+      background-color: var(--color-blue);
+      color: var(--color-white);
+    }
+
+    &[data-color=white] {
+      container-name: var(--color-white);
+      color: var(--color-white);
+      border: 2px dashed var(--color-gray);
+
+      @container (inline-size >= 30rem) {
+        p {
+            background-color: red;
+            border-radius: 0 1rem 0 1rem;
+        }
+      }
+
+      @container (inline-size < 30rem) {
+        p {
+          background-color: yellow;
+          color: var(--color-black);
+          border-radius: 1rem;
+        }
+      }
+    }
+
+    &[data-color=gray] {
+      container-name: var(--color-gray);
+      background-color: var(--color-gray);
+      color: var(--color-white);
+    }
+
+    &:last-child {
+      margin-block-end: 0;
+    }
+
+    p {
+      padding: .5rem 2rem;
+    }
+  }
 }
