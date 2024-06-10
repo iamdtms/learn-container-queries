@@ -69,3 +69,18 @@ body {
     }
   }
 }
+
+.loader {
+  display: none;
+  place-content: center;
+}
+
+@supports not (container-type: inline-size) {
+  .container {
+    display: none;
+  }
+
+  .loader {
+    display: grid;
+  }
+}
